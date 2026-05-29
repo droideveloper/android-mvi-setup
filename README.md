@@ -3,7 +3,7 @@
 ## How to set up
 just run 
 ```bash
-bash ./install-sh <folder_name> ## (android-setup) would be fine
+bash ./install.sh <folder_name> ## (android-setup) would be fine
 ```
 it will create folder and move scripts and templates into there
 will also add alias for creating core module and feature module for android 
