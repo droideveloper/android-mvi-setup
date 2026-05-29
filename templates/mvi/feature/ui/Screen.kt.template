@@ -1,0 +1,66 @@
+package {{PACKAGE}}
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import {{PACKAGE}}.di.{{FEATURE_NAME}}Component
+
+@Composable
+fun {{FEATURE_NAME}}Screen() {
+    val component = remember{{FEATURE_NAME}}Component()
+    val viewModel = composeViewModel {
+        component.{{FEATURE_LOWER}}ViewModelProvider
+    }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    {{FEATURE_NAME}}Content(state, viewModel::dispatch)
+}
+
+@Composable
+private fun remember{{FEATURE_NAME}}Component() {
+    val appComponent = LocalAppComponent.current
+    return remember {
+        {{FEATURE_NAME}}Component.create(
+            appComponent = appComponent,
+        )
+    }
+}
+
+@Composable
+private fun {{FEATURE_NAME}}Content(
+    state: {{FEATURE_NAME}}State,
+    dispatch: ({{FEATURE_NAME}}Event) -> Unit,
+) {
+    when(uiState = state.uiState) {
+        UiState.Loading -> {{FEATURE_NAME}}LoadingContent()
+        is UiState.Failure -> when {
+            is UiState.Failure.Text -> {{FEATURE_NAME}}FailureContent(state.message, dispatch)
+            is UiState.Failure.Res -> {{FEATURE_NAME}}FailureContent(
+                message = stringResource(uiState.stringRes),
+                dispatch = dispatch,
+            )
+        }
+        is UiState.Success -> {{FEATURE_NAME}}SuccessContent(uiState.data, dispatch)
+    }
+}
+
+@Composable 
+private fun {{FEATURE_NAME}}SuccessContent(
+    state: {{FEATURE_NAME}},
+    dispatch: ({{FEATURE_NAME}}Event) -> Unit,
+) {
+    // Todo implement success content
+}
+
+@Composable
+private fun {{FEATURE_NAME}}FailureContent(
+    message: String,
+    dispatch: ({{FEATURE_NAME}}Event) -> Unit,
+) {
+    // Todo implement failure content
+}
+
+@Composable
+private fun {{FEATURE_NAME}}LoadingContent() {
+    // Todo implement loading content
+}

@@ -1,0 +1,18 @@
+package {{PACKAGE}}.usecase
+
+import javax.inject.Inject
+
+class Get{{FEATURE_NAME}}UseCase @Inject constructor(
+    private val repository: {{FEATURE_LOWER}}Repository,
+) {
+
+    operator suspend fun invoke(): Result<{{FEATURE_NAME}}> = runCatching {
+        repository.get{{FEATURE_NAME}}()
+            .getOrThrow()
+    }
+        .onFailure { error -> 
+            if (error is CancellationException) {
+                throw error
+            }
+        }
+}

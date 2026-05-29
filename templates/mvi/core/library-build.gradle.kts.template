@@ -1,0 +1,10 @@
+plugins {
+    alias(libs.plugins.mvi.library)
+}
+
+android {
+    namespace = "{{FULL_PACKAGE}}"
+}
+
+dependencies {
+}

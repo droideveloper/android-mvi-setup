@@ -1,0 +1,17 @@
+package {{PACKAGE}}
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+internal data class Json{{FEATURE_NAME}}(
+    // TODO implement data model
+)
+
+// Mappers
+internal fun Json{{FEATURE_NAME}}.toDomain(): {{FEATURE_NAME}} = {{FEATURE_NAME}}(
+    // Map properties to domain model
+)
+
+internal fun {{FEATURE_NAME}}.toData(): Json{{FEATURE_NAME}} = Json{{FEATURE_NAME}}(
+    // Map properties to data model
+)

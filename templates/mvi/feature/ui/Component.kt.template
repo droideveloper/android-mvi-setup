@@ -1,0 +1,39 @@
+package {{PACKAGE}}.di
+
+import com.mvi.core.app.AppComponent
+import com.mvi.core.injection.FeatureScope
+import dagger.Component
+import dagger.Provider
+
+@FeatureScope
+@Component(
+    dependencies = [
+        AppComponent::class,
+    ],
+    modules = [
+        DataModule::class,
+        // TODO add other modules
+    ]
+)
+internal interface {{FEATURE_NAME}}Component {
+
+    val {{FEATURE_LOWER}}ViewModelProvider: Provider<{{FEATURE_NAME}}ViewModel>
+
+    @Component.Factory
+    interface Factory {
+
+        fun create(
+            appComponent: AppComponent,
+        ): {{FEATURE_NAME}}Component
+    }
+
+    companion object {
+        fun create(
+            appComponent: AppComponent,
+        ): {{FEATURE_NAME}}Component =
+            Dagger{{FEATURE_NAME}}Component.factory()
+                .create(
+                    appComponent = appComponent,
+                )
+    }
+}

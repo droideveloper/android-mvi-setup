@@ -1,0 +1,8 @@
+package {{PACKAGE}}.repo
+
+interface {{FEATURE_NAME}}Repository {
+
+    suspend fun get{{FEATURE_NAME}}(): Result<{{FEATURE_NAME}}>
+
+    // TODO add if needed get, post, save, delete and update kind of operation if needed
+}

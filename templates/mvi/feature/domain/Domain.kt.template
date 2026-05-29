@@ -1,0 +1,5 @@
+package {{PACKAGE}}
+
+data class {{FEATURE_NAME}}(
+    // TODO implement domain model
+)

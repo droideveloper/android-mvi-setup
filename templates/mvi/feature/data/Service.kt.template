@@ -1,0 +1,22 @@
+package {{PACKAGE}}.service
+
+import retrofit2.http.GET
+
+internal interface {{FEATURE_NAME}}Service {
+
+    @GET("/{{FEATURE_LOWER}}")
+    suspend fun get{{FEATURE_NAME}}(): Result<Json{{FEATURE_NAME}}>
+}
+
+// Mock json response
+internal val mockJson{{FEATURE_NAME}} = Json{{FEATURE_NAME}}(
+    // Todo set mock object data
+)
+
+// Mock service 
+internal object Mock{{FEATURE_NAME}}Service : {{FEATURE_NAME}}Service {
+
+    override suspend fun get{{FEATURE_NAME}}(): Result<Json{{FEATURE_NAME}}> =
+        Result.success(mockJson)
+        // May be put error
+}

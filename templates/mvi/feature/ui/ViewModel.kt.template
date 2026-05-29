@@ -1,0 +1,45 @@
+package {{PACKAGE}}
+
+import com.mvi.core.navigation.FeatureRouter
+import javax.inject.Inject
+
+internal {{FEATURE_NAME}}ViewModel @Inject constructor(
+    private val featureRouter: FeatureRouter,
+    // Todo add feature deps useCases and router and stuff
+) : FlowMviViewModel<{{FEATURE_NAME}}State, {{FEATURE_NAME}}Event>(
+    initialState = {{FEATURE_NAME}}State()
+) {
+
+    init {
+        on<{{FEATURE_NAME}}Event.OnLoad> {
+            // Todo event logging for analytics etc
+        }
+        onClick<{{FEATURE_NAME}}Event.OnTryAgainClicked> {
+            initialState.update { state ->
+                state.copy(uiState = UiState.Loading)
+            }
+            collectInitialState()
+        }
+
+        viewModelScope.launch {
+            collectInitialState()
+        }
+    }
+
+    private suspend fun collectInitialState() = runCatching {
+        /*
+            val data = get{{FEATURE_NAME}}()
+                .getOrThrow()
+            
+            internalState.update { state ->
+                state.copy(uiState = UiState.Success(data = data))
+            }
+        */
+    }
+        .onFailure { error ->
+            // Todo map error to error state
+            internalState.update { state -> 
+                state.copy(uiState = UiState.Failure.Text(message = error.message ?: "Default error"))
+            }
+        }
+}

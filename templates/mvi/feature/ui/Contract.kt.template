@@ -1,0 +1,43 @@
+package {{PACKAGE}}
+
+import androidx.compose.runtime.Immutable
+
+internal sealed interface UiState {
+    data object Loading : UiState
+    sealed interface Failure : UiState {
+        data class Text(val message: String) : Failure
+        data class Res(val stringRes: Int) : Failure
+    }
+    data class Success(val data: {{FEATURE_NAME}})
+}
+
+internal sealed interface {{FEATURE_NAME}}Event {
+    data object OnLoad : {{FEATURE_NAME}}Event
+    data object OnTryAgainClicked : {{FEATURE_NAME}}Event
+}
+
+@Immutable
+internal data class {{FEATURE_NAME}}State(
+    val uiState : UiState = UiState.Loading,
+)
+
+internal sealed interface {{FEATURE_NAME}}SideEffect {
+    sealed interface ShowSnackbar {
+
+        sealed interface Action {
+            data object None : Action
+            data class Text(val text: String) : Action
+            data class Res(val stringRes: String) : Action
+        }
+
+        data class Text(
+            val message: String,
+            val action : ShowSnackbar.Action = ShowSnackbar.Action.None,
+        ) : ShowSnackbar
+
+        data class Res(
+            val stringRes: Int,
+            val action : ShowSnackbar.Action = ShowSnackbar.Action.None,
+        ) : ShowSnackbar
+    }
+}

@@ -1,0 +1,7 @@
+plugins {
+    alias(libs.plugins.mvi.common)
+}
+
+dependencies {
+    api(projects.core.{{FEATURE_LOWER}}.gateway)
+}

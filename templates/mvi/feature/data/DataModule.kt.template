@@ -1,0 +1,30 @@
+package {{PACKAGE}}.di
+
+import com.mvi.core.network.Network
+import com.mvi.core.network.NetworkBuilder
+import com.mvi.core.network.ServiceUrl
+import {{PACKAGE}}.service.{{FEATURE_NAME}}Service
+import dagger.Module
+import dagger.Provide
+import dagger.Binds
+
+@Module
+interface DataModule {
+
+    companion object {
+
+        @Provides
+        internal fun provideRepository(impl: {{FEATURE_NAME}}RepositoryImpl): {{FEATURE_NAME}}Repository = impl
+
+        @Provides
+        internal fun provideNetwork(builder: NetworkBuilder): Network =
+            // replace `https://example.org` with your service url of this feature
+            builder.withServiceUrl(serviceUrl = ServiceUrl.getOrThrow("https://example.org"))
+                .build()
+
+        @Provides
+        internal fun provideService(network: Network): {{FEATURE_NAME}}Service =
+            network.create<{{FEATURE_NAME}}Service>(factory = { Mock{{FEATURE_NAME}}Service })
+    }
+
+} 

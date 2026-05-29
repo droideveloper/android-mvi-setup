@@ -1,0 +1,16 @@
+package {{PACKAGE}}.repo
+
+import {{PACKAGE}}.service.{{FEATURE_NAME}}Service
+import javax.inject.Inject
+
+internal class {{FEATURE_NAME}}RepositoryImpl @Inject constructor(
+    private val service: {{FEATURE_NAME}}Service,
+) : {{FEATURE_NAME}}Repository {
+
+    override suspend fun get{{FEATURE_NAME}}(): Result<{{FEATURE_NAME}}> = runCatching {
+        val result = service.get{{FEATURE_NAME}}()
+            .getOrThrow()
+
+        result.toDomain()
+    }
+}

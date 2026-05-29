@@ -1,0 +1,11 @@
+plugins {
+    alias(libs.plugins.mvi.library)
+}
+
+android {
+    namespace = "{{FULL_PACKAGE}}"
+}
+
+dependencies {
+    api(projects.core.{{FEATURE_LOWER}}.gateway)
+}
