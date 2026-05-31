@@ -118,6 +118,8 @@ process_template "$DOMAIN_TEMPLATE_DIR/Domain.kt.template" "$DOMAIN_MAIN_DIR/${F
 process_template "$DOMAIN_TEMPLATE_DIR/Repository.kt.template" "$DOMAIN_MAIN_DIR/repo/${FEATURE_NAME}Repository.kt"
 process_template "$DOMAIN_TEMPLATE_DIR/UseCase.kt.template" "$DOMAIN_MAIN_DIR/usecase/Get${FEATURE_NAME}UseCase.kt"
 process_template "$DOMAIN_TEMPLATE_DIR/build.gradle.kts.template" "$DOMAIN_DIR/build.gradle.kts"
+touch "$DOMAIN_DIR/.gitignore"
+echo "/build" >> "$DOMAIN_DIR/.gitignore"
 
 echo -e "${YELLOW}📁 SetUp $FEATURE_LOWER:domain module${NC}"
 
@@ -139,6 +141,8 @@ if [[ "$FEATURE_TYPE" == "full" ]]; then
     process_template "$DATA_TEMPLATE_DIR/Repository.kt.template" "$DATA_MAIN_DIR/repo/${FEATURE_NAME}RepositoryImpl.kt"
     process_template "$DATA_TEMPLATE_DIR/Service.kt.template" "$DATA_MAIN_DIR/service/${FEATURE_NAME}Service.kt"
     process_template "$DATA_TEMPLATE_DIR/build.gradle.kts.template" "$DATA_DIR/build.gradle.kts"
+    touch "$DATA_DIR/.gitignore"
+    echo "/build" >> "$DATA_DIR/.gitignore"
 
     echo -e "${YELLOW}📁 SetUp $FEATURE_LOWER:data module${NC}"
 fi
@@ -162,6 +166,8 @@ fi
 if [[ "$FEATURE_TYPE" == "no-data" ]]; then
     process_template "$UI_TEMPLATE_DIR/no-data.build.gradle.kts.template" "$UI_DIR/build.gradle.kts"
 fi
+touch "$UI_DIR/.gitignore"
+echo "/build" >> "$UI_DIR/.gitignore"
 
 echo -e "${YELLOW}📁 SetUp $FEATURE_LOWER:ui module${NC}"
 

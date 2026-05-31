@@ -120,6 +120,8 @@ if [[ "$FEATURE_TYPE" == "full" ]]; then
 
     # Generate domain files
     process_template "$GATEWAY_TEMPLATE_DIR/common-build.gradle.kts.template" "$GATEWAY_DIR/build.gradle.kts"
+    touch "$GATEWAY_DIR/.gitignore"
+    echo "/build" >> "$GATEWAY_DIR/.gitignore"
 
     echo -e "${YELLOW}📁 SetUp :core:$FEATURE_LOWER:gateway module${NC}"
 
@@ -133,6 +135,8 @@ if [[ "$FEATURE_TYPE" == "full" ]]; then
 
     # Generate domain files
     process_template "$IMPLEMENTATION_TEMPLATE_DIR/$ARCH_TYPE-implementation.build.gradle.kts.template" "$IMPLEMENTATION_DIR/build.gradle.kts"
+    touch "$IMPLEMENTATION_DIR/.gitignore"
+    echo "/build" >> "$IMPLEMENTATION_DIR/.gitignore"
 
     echo -e "${YELLOW}📁 SetUp :core:$FEATURE_LOWER:implementation module${NC}"
 fi
@@ -149,6 +153,8 @@ if [[ "$FEATURE_TYPE" == "no-gateway" ]]; then
 
     # Generate domain files
     process_template "$IMPLEMENTATION_TEMPLATE_DIR/$ARCH_TYPE-build.gradle.kts.template" "$IMPLEMENTATION_DIR/build.gradle.kts"
+    touch "$IMPLEMENTATION_DIR/.gitignore"
+    echo "/build" >> "$IMPLEMENTATION_DIR/.gitignore"
 
     echo -e "${YELLOW}📁 SetUp :core:$FEATURE_LOWER module${NC}"
 fi
