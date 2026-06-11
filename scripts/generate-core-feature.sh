@@ -120,6 +120,7 @@ if [[ "$FEATURE_TYPE" == "full" ]]; then
 
     # Generate domain files
     process_template "$GATEWAY_TEMPLATE_DIR/common-build.gradle.kts.template" "$GATEWAY_DIR/build.gradle.kts"
+    # Add .gitignore
     touch "$GATEWAY_DIR/.gitignore"
     echo "/build" >> "$GATEWAY_DIR/.gitignore"
 
@@ -135,6 +136,7 @@ if [[ "$FEATURE_TYPE" == "full" ]]; then
 
     # Generate domain files
     process_template "$IMPLEMENTATION_TEMPLATE_DIR/$ARCH_TYPE-implementation.build.gradle.kts.template" "$IMPLEMENTATION_DIR/build.gradle.kts"
+    # Add .gitignore
     touch "$IMPLEMENTATION_DIR/.gitignore"
     echo "/build" >> "$IMPLEMENTATION_DIR/.gitignore"
 
@@ -153,6 +155,7 @@ if [[ "$FEATURE_TYPE" == "no-gateway" ]]; then
 
     # Generate domain files
     process_template "$IMPLEMENTATION_TEMPLATE_DIR/$ARCH_TYPE-build.gradle.kts.template" "$IMPLEMENTATION_DIR/build.gradle.kts"
+    # Add .gitignore
     touch "$IMPLEMENTATION_DIR/.gitignore"
     echo "/build" >> "$IMPLEMENTATION_DIR/.gitignore"
 
